@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Our Bookshop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff6f61;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 0.5em 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        section div {
+            background-color: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to Our Bookshop!</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">New Arrivals</a>
+    <a href="#">Best Sellers</a>
+    <a href="#">Contact</a>
+</nav>
+
+<section>
+    <h2>Featured Books</h2>
+    <div th:each="book : ${featuredBooks}">
+        <div>
+            <h3 th:text="${book.title}">Book Title</h3>
+            <p th:text="${book.description}">Description</p>
+            <!-- More details about the book -->
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Bookshop Inc.</p>
+</footer>
+</body>
+</html>
