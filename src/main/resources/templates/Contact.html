@@ -1,0 +1,93 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Our Bookshop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #fad30e;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 0.5em 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        section div {
+            background-color: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to Our Final Project - Bookshop!</h1>
+</header>
+
+<nav>
+    <a th:href="@{/}" href="#">Home</a>
+    <a th:href="@{/books}" href="#">Books</a>
+    <a th:href="@{/cart}" href="#">Cart</a>
+    <a th:href="@{/login}" href="#">Login</a>
+    <a th:href="@{/contact}" href="#">Contact</a>
+</nav>
+
+<section>
+    <h2>Členovia týmu:</h2>
+    <h3>Ľuboš Puschenreiter</h3>
+    <h3>Petr Balajka</h3>
+    <h3>Juraj Šarloši</h3>
+
+</section>
+
+<footer>
+    <p>&copy; 2024 Bookshop Inc.</p>
+</footer>
+</body>
+</html>
