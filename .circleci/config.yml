@@ -1,3 +1,5 @@
+version: 2.1
+
 jobs:
   compile-project:
     docker:
@@ -52,4 +54,3 @@ workflows:
       - tests
       - code-quality
 #      - code-smells #      - disabled in case there will be huge refactor
-
