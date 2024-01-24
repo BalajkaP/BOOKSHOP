@@ -1,0 +1,49 @@
+/* categories.css */
+body{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e8dfdf;
+}
+
+#book-categories {
+    width: 70em;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+#book-categories h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#book-categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#book-categories li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+#book-categories a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+#book-categories a:hover {
+    background-color: #f2f2f2;
+}
