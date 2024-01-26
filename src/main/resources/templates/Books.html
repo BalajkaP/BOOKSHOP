@@ -63,8 +63,38 @@
             bottom: 0;
             width: 100%;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #c5ff84;
+        }
     </style>
 </head>
+<script>
+    function addToCart(button) {
+        var bookTitle = button.parentElement.parentElement.children[0].innerText;
+        alert('Kniha "' + bookTitle + '" bola pridaná do košíka.');
+    }
+</script>
 <body>
 <header>
     <h1>Welcome to Our Final Project - Bookshop!</h1>
@@ -80,6 +110,24 @@
 
 <section>
     <h2>Zoznam kníh</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.name+' ' +book.author.surname}"></td>
+            <td th:text="${book.price}"></td>
+            <td><button onclick="addToCart(this)">Add to cart</button></td>
+        </tr>
+         </tbody>
+    </table>
 
 </section>
 
