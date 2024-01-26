@@ -1,16 +1,139 @@
-<!-- contact.html -->
 <!DOCTYPE html>
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontaktujte nás</title>
+    <title>Catalogs and Brochures</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <style>
+        #brochures-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .brochure-item {
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        #book-details {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+            display: none;
+        }
+
+        #catalogsAndBrochures {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .catalog-item {
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Kontaktujte nás</h1>
+    <h1>Katalogy a brožúry</h1>
 
-    <!-- Obsah stránky Kontakt -->
+    <!-- Brožúry -->
+    <div id="brochures-container">
+        <div class="brochure-item" onclick="showBookDetails('Lorem Ipsum', 'John Doe', '$19.99')">
+            <img src="cesta/k/obrazku1.jpg" alt="Brožúra 1">
+            <p>Brožúra 1</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Dolor Sit Amet', 'Jane Smith', '$24.99')">
+            <img src="cesta/k/obrazku2.jpg" alt="Brožúra 2">
+            <p>Brožúra 2</p>
+        </div>
+        <!-- Pridajte ďalšie položky podľa potreby -->
+    </div>
+
+    <!-- Detaily o knihe -->
+    <div id="book-details">
+        <h2>Detaily o knihe</h2>
+        <p><strong>Názov knihy:</strong> <span id="book-title"></span></p>
+        <p><strong>Autor:</strong> <span id="book-author"></span></p>
+        <p><strong>Cena:</strong> <span id="book-price"></span></p>
+    </div>
+
+    <!-- Katalógy a brožúry -->
+    <div id="catalogsAndBrochures">
+        <!-- Sem bude vložená matica katalógov a brožúr pomocou JavaScriptu -->
+    </div>
+
+    <script>
+        // JavaScript kód pre brožúry a katalógy
+        document.addEventListener("DOMContentLoaded", function() {
+            createCatalogsAndBrochures();
+        });
+
+        function showBookDetails(title, author, price) {
+            document.getElementById('book-title').innerText = title;
+            document.getElementById('book-author').innerText = author;
+            document.getElementById('book-price').innerText = price;
+            document.getElementById('book-details').style.display = 'block';
+        }
+
+        function createCatalogsAndBrochures() {
+            const container = document.getElementById('catalogsAndBrochures');
+
+            const catalogsAndBrochuresData = [
+                { title: 'Katalóg 1', year: '2022', content: 'Obsah katalógu 1' },
+                { title: 'Katalóg 2', year: '2021', content: 'Obsah katalógu 2' },
+                { title: 'Brožúra 1', year: '2020', content: 'Obsah brožúry 1' },
+                // Ďalšie údaje o katalógoch a brožúrach
+            ];
+
+            for (let i = 0; i < catalogsAndBrochuresData.length; i++) {
+                const catalogItem = document.createElement('div');
+                catalogItem.classList.add('catalog-item');
+                catalogItem.setAttribute('data-title', catalogsAndBrochuresData[i].title);
+                catalogItem.setAttribute('data-year', catalogsAndBrochuresData[i].year);
+                catalogItem.setAttribute('data-content', catalogsAndBrochuresData[i].content);
+
+                container.appendChild(catalogItem);
+            }
+
+            const catalogItems = document.querySelectorAll('.catalog-item');
+            catalogItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    showCatalogOrBrochureDetails(item);
+                });
+            });
+        }
+
+        function showCatalogOrBrochureDetails(catalogItem) {
+            const detailsContainer = document.getElementById('book-details');
+            const catalogTitle = catalogItem.getAttribute('data-title');
+            const catalogYear = catalogItem.getAttribute('data-year');
+            const catalogContent = catalogItem.getAttribute('data-content');
+
+            detailsContainer.innerHTML = `
+                <h2>${catalogTitle}</h2>
+                <p><strong>Rok vydania:</strong> ${catalogYear}</p>
+                <p>${catalogContent}</p>
+            `;
+
+            detailsContainer.style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>

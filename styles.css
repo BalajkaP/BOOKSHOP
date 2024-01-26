@@ -47,6 +47,21 @@ nav {
     background-color: #f2f2f2;
     text-align: center;
 }
+/* Štýly pre maticu kníh */
+#book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;  /* Medzera medzi prvkami */
+}
+/* Štýly pre jednotlivé knihy */
+.book-item {
+    position: relative;
+    cursor: pointer;
+}
+/* Štýly pre zobrazenie detailov o knihe */
+#book-details {
+    display: none; /* Na začiatku skryté */
+}
 
 footer {
     background-color: #333;
