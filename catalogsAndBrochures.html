@@ -56,16 +56,16 @@
 
     <h1>Katalogy a brožúry</h1>
 
-    <!-- Brožúry -->
+    <!-- Umiestnenie všetkých brožúr -->
     <div id="brochures-container">
-        <!-- Brozura prva -->
-        <div class="brochure-item" onclick="showBookDetails('Lorem Ipsum', 'John Doe', '$19.99')">
-            <img src="Images_for_final_project/Baroque music.png" alt="Brožúra 1">
-            <p>Brožúra 1</p>
+        <!-- Brožura prva -->
+        <div class="brochure-item" onclick="showBookDetails('Lorem Bach to Basic', 'Russell E. Lanning', '1985','$10')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Bach to Basic">
+            <p>Bach to Basic</p>
         </div>
 
         <div class="brochure-item" onclick="showBookDetails('Dolor Sit Amet', 'Jane Smith', '$24.99')">
-            <img src="cesta/k/obrazku2.jpg" alt="Brožúra 2">
+            <img src="Images_for_final_project/Music by the masters.png" alt="Brožúra 2">
             <p>Brožúra 2</p>
         </div>
         <!-- Pridajte ďalšie položky podľa potreby -->
@@ -73,9 +73,10 @@
 
     <!-- Detaily o knihe -->
     <div id="book-details">
-        <h2>Detaily o knihe</h2>
+        <h2>Detaily o Katalogu a Brožúry</h2>
         <p><strong>Názov knihy:</strong> <span id="book-title"></span></p>
         <p><strong>Autor:</strong> <span id="book-author"></span></p>
+        <p><strong>Rok vydania:</strong> <span id="book-year"></span></p>
         <p><strong>Cena:</strong> <span id="book-price"></span></p>
     </div>
 
@@ -90,9 +91,10 @@
             createCatalogsAndBrochures();
         });
 
-        function showBookDetails(title, author, price) {
+        function showBookDetails(title, author, year, price) {
             document.getElementById('book-title').innerText = title;
             document.getElementById('book-author').innerText = author;
+            document.getElementById('book-year').innerText = year;
             document.getElementById('book-price').innerText = price;
             document.getElementById('book-details').style.display = 'block';
         }
