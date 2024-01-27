@@ -6,9 +6,9 @@
 }
 
 .brochure-item {
-    width: 200%; /* hodnota pred tym 30%*/
+    width: 30%; /* Šírka pre 3 brožúry na jednom riadku */
     /*height: auto;*/
-    max-width: 20px; /* Max. šírka brožúry*/
+    max-width: 200px; /* Max. šírka brožúry*/
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;

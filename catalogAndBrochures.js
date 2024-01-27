@@ -40,6 +40,36 @@ function showCatalogOrBrochureDetails(catalogItem) {
     const catalogTitle = catalogItem.getAttribute('data-title');
     const catalogYear = catalogItem.getAttribute('data-year');
     const catalogContent = catalogItem.getAttribute('data-content');
+    
+    const detailsWindow = window.open('', '_blank');
+    detailsWindow.document.write(`
+        <html>
+        <head>
+            <title>${catalogTitle}</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                }
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+                .details {
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>${catalogTitle}</h2>
+            <div class="details">
+                <p><strong>Rok vydania:</strong> ${catalogYear}</p>
+                <p>${catalogContent}</p>
+            </div>
+            <img src="cesta/k/obrazku1.jpg" alt="${catalogTitle}">
+        </body>
+        </html>
+    `);
 
     detailsContainer.innerHTML = `
         <h2>${catalogTitle}</h2>

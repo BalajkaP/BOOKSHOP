@@ -19,7 +19,7 @@
         }
 
         .brochure-item {
-            width: 30%;
+            width: 22%;
             margin: 10px;
             padding: 10px;
             border: 1px solid #ccc;
@@ -27,6 +27,7 @@
             cursor: pointer;
         }
 
+       
         #book-details {
             margin: 20px;
             padding: 20px;
@@ -50,6 +51,32 @@
             box-sizing: border-box;
             cursor: pointer;
         }
+        #catalogAndBrochureDetails {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+            display: none; /* Počiatočne skryté detaily */
+        }
+
+        /* Nový štýl pre obrázok v novom okne */
+        #details-window {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #ccc;
+            z-index: 1;
+        }
+
+        /* Nový štýl pre obrázok v novom okne */
+        #details-window img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -59,16 +86,68 @@
     <!-- Umiestnenie všetkých brožúr -->
     <div id="brochures-container">
         <!-- Brožura prva -->
-        <div class="brochure-item" onclick="showBookDetails('Lorem Bach to Basic', 'Russell E. Lanning', '1985','$10')">
+        <div class="brochure-item" onclick="showBookDetails('Bach to Basic', 'Russell E. Lanning', '1985','$10')">
             <img src="Images_for_final_project/Bach to Basic.png" alt="Bach to Basic">
             <p>Bach to Basic</p>
         </div>
 
-        <div class="brochure-item" onclick="showBookDetails('Dolor Sit Amet', 'Jane Smith', '$24.99')">
-            <img src="Images_for_final_project/Music by the masters.png" alt="Brožúra 2">
-            <p>Brožúra 2</p>
+        <div class="brochure-item" onclick="showBookDetails('Barocque music', 'Jane Smith', '1985', '$18,99')">
+            <img src="Images_for_final_project/Music by the masters.png" alt="Barocque music">
+            <p>Barocque music</p>
+            
         </div>
-        <!-- Pridajte ďalšie položky podľa potreby -->
+
+        <div class="brochure-item" onclick="showBookDetails('Clasical master pieces', 'Russell E. Nikita', '1995','$10,5')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Clasical master pieces">
+            <p>Clasical master pieces</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Dominic Argento', 'John Peterson ', '2005','$19')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Dominic Argento">
+            <p>Dominic Argento</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Go forth in lightasic', 'Patrick M. Liebergen', '1985','$21,75')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Go forth in ligh">
+            <p>Go forth in light</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Lorem BacChoral massterworksh to Basic', 'Johan Sebastian Bach', '1989','$35')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Choral massterworks">
+            <p>Choral massterworks</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Lorem Bach Symphonies of Bethovento Basic', 'Ludwig van Beethoven', '1785','$10')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Symphonies of Bethoven">
+            <p>Symphonies of Bethoven</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Music by the masters', 'Vince Kanda', '2007','$16')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Music by the masters">
+            <p>Music by the masters</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('French baroquie music', 'John Winchester', '2011','$57')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="French baroquie music">
+            <p>French baroquie music</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Renaissance music', 'Mathias Rex', '2024','$69')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Renaissance music">
+            <p>Renaissance music</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('1000 years of Clasical musi', 'George Szmolniczky', '2024','$71')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="1000 years of Clasical music">
+            <p>1000 years of Clasical music</p>
+        </div>
+
+        <div class="brochure-item" onclick="showBookDetails('Music of the English Renaissance', 'Johny Wood', '2017','$34')">
+            <img src="Images_for_final_project/Bach to Basic.png" alt="Music of the English Renaissance">
+            <p>Music of the English Renaissance</p>
+        </div>
+
+                <!-- Pridajte ďalšie položky podľa potreby -->
     </div>
 
     <!-- Detaily o knihe -->
@@ -82,8 +161,11 @@
 
     <!-- Katalógy a brožúry -->
     <div id="catalogsAndBrochures">
-        <!-- Sem bude vložená matica katalógov a brožúr pomocou JavaScriptu -->
+        <!-- Sem bude vložená matica katalógov a brožúr pomocou JavaScriptu !!!!!!!!!!!!!!!!!-->
     </div>
+    <!-- Div pre zobrazenie detailov v novom okne -->
+    <!-- Zmena 2: Pridaný nový div pre detaily v novom okne -->
+    <div id="details-window"></div>
 
     <script>
         // JavaScript kód pre brožúry a katalógy
@@ -99,49 +181,89 @@
             document.getElementById('book-details').style.display = 'block';
         }
 
-        function createCatalogsAndBrochures() {
-            const container = document.getElementById('catalogsAndBrochures');
+        // Otevření nového okna s obrázkem a detaily
+function openDetailsWindow(title, year, content, imageUrl) {
+    const detailsWindow = window.open('', '_blank');
+    detailsWindow.document.write(`
+        <html>
+        <head>
+            <title>${title}</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                }
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+                .details {
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>${title}</h2>
+            <div class="details">
+                <p><strong>Rok vydania:</strong> ${year}</p>
+                <p>${content}</p>
+            </div>
+            <img src="${imageUrl}" alt="${title}">
+        </body>
+        </html>
+    `);
+}
 
-            const catalogsAndBrochuresData = [
-                { title: 'Katalóg 1', year: '2022', content: 'Obsah katalógu 1' },
-                { title: 'Katalóg 2', year: '2021', content: 'Obsah katalógu 2' },
-                { title: 'Brožúra 1', year: '2020', content: 'Obsah brožúry 1' },
-                // Ďalšie údaje o katalógoch a brožúrach
-            ];
+document.addEventListener("DOMContentLoaded", function () {
+    createCatalogsAndBrochures();
+});
 
-            for (let i = 0; i < catalogsAndBrochuresData.length; i++) {
-                const catalogItem = document.createElement('div');
-                catalogItem.classList.add('catalog-item');
-                catalogItem.setAttribute('data-title', catalogsAndBrochuresData[i].title);
-                catalogItem.setAttribute('data-year', catalogsAndBrochuresData[i].year);
-                catalogItem.setAttribute('data-content', catalogsAndBrochuresData[i].content);
+function createCatalogsAndBrochures() {
+    const container = document.getElementById('catalogsAndBrochures');
 
-                container.appendChild(catalogItem);
-            }
+    const catalogsAndBrochuresData = [
+        { title: 'Katalóg 1', year: '2022', content: 'Obsah katalógu 1', imageUrl: 'path/k/obrazku1.jpg' },
+        { title: 'Katalóg 2', year: '2021', content: 'Obsah katalógu 2', imageUrl: 'path/k/obrazku2.jpg' },
+        { title: 'Brožúra 1', year: '2020', content: 'Obsah brožúry 1', imageUrl: 'path/k/obrazku3.jpg' },
+        // Ďalšie údaje o katalógoch a brožúrach
+    ];
 
-            const catalogItems = document.querySelectorAll('.catalog-item');
-            catalogItems.forEach(function(item) {
-                item.addEventListener('click', function() {
-                    showCatalogOrBrochureDetails(item);
-                });
-            });
-        }
+    catalogsAndBrochuresData.forEach(data => {
+        const catalogItem = document.createElement('div');
+        catalogItem.classList.add('catalog-item');
+        catalogItem.setAttribute('data-title', data.title);
+        catalogItem.setAttribute('data-year', data.year);
+        catalogItem.setAttribute('data-content', data.content);
+        catalogItem.setAttribute('data-image-url', data.imageUrl);
 
-        function showCatalogOrBrochureDetails(catalogItem) {
-            const detailsContainer = document.getElementById('book-details');
-            const catalogTitle = catalogItem.getAttribute('data-title');
-            const catalogYear = catalogItem.getAttribute('data-year');
-            const catalogContent = catalogItem.getAttribute('data-content');
+        // Přidáme event listener na obrázek v katalogu
+        const catalogImage = document.createElement('img');
+        catalogImage.src = data.imageUrl;
+        catalogImage.alt = data.title;
+        catalogImage.addEventListener('click', function () {
+            showCatalogOrBrochureDetails(catalogItem);
+        });
 
-            detailsContainer.innerHTML = `
-                <h2>${catalogTitle}</h2>
-                <p><strong>Rok vydania:</strong> ${catalogYear}</p>
-                <p>${catalogContent}</p>
-            `;
+        catalogItem.appendChild(catalogImage);
+        container.appendChild(catalogItem);
+    });
+}
 
-            detailsContainer.style.display = 'block';
-        }
-    </script>
+function showCatalogOrBrochureDetails(catalogItem) {
+    const detailsContainer = document.getElementById('catalogAndBrochureDetails');
+    const catalogTitle = catalogItem.getAttribute('data-title');
+    const catalogYear = catalogItem.getAttribute('data-year');
+    const catalogContent = catalogItem.getAttribute('data-content');
+    const catalogImageUrl = catalogItem.getAttribute('data-image-url');
 
-</body>
-</html>
+    // Zavoláme funkci pro otevření nového okna s detaily
+    openDetailsWindow(catalogTitle, catalogYear, catalogContent, catalogImageUrl);
+
+    detailsContainer.innerHTML = `
+        <h2>${catalogTitle}</h2>
+        <p><strong>Rok vydania:</strong> ${catalogYear}</p>
+        <p>${catalogContent}</p>
+    `;
+
+    detailsContainer.style.display = 'block';
+}
