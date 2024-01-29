@@ -13,15 +13,68 @@ function getRandomColor() {
     return color;
 }
 
-// Nastavenie náhodného obrázka pri načítaní stránky
-document.addEventListener("DOMContentLoaded", function() {
-    setRandomBannerImage();
+const categoryLinks = document.querySelectorAll('#book-categories a');
+
+
+// Event listener pro každý odkaz na kategorii
+categoryLinks.forEach(link => {
+  link.addEventListener('click', function(event) {
+    event.preventDefault();
+    const category = this.getAttribute('data-category');
+    openModal(category); // Otevře modální okno s knihami dané kategorie
+  });
 });
 
-function setRandomBannerImage() {
-    const banner = document.getElementById('book-banner');
-    const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    const imagePath = 'cesta/k/' + randomImage; // Uveďte správnu cestu k obrázku
-    banner.style.backgroundImage = 'url("' + imagePath + '")';
-}
+
+// Funkce pro otevření modálního okna s obsahem kategorie
+function openModal(category) {
+    const modal = document.getElementById('myModal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContentList = document.getElementById('modal-content-list');
+
+  
+    // Nastaví titulek modálního okna
+    modalTitle.textContent = `Knižní kategorie: ${category}`;
+
+  
+    // Zde byste měli načítat obsah knih pro danou kategorii
+    // Místo toho použijeme jednoduchý seznam pro příklad
+    const books = ['Kniha 1', 'Kniha 2', 'Kniha 3'];
+
+  
+    // Naplní seznam v modálním okně
+    modalContentList.innerHTML = '';
+    books.forEach(book => {
+      const listItem = document.createElement('li');
+      listItem.textContent = book;
+      modalContentList.appendChild(listItem);
+    });
+  
+
+    // Otevře modální okno
+    modal.style.display = 'block';
+  }
+  
+  // Funkce pro zavření modálního okna
+  function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+  }
+  
+  // Event listener pro tlačítko zavření
+  const closeBtn = document.querySelector('.close');
+  closeBtn.addEventListener('click', closeModal);
+
+  
+  // Event listener pro modální okno (zavře se při kliknutí mimo obsah)
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+
+
+
+  
+

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function createCatalogsAndBrochures() {
     const container = document.getElementById('catalogsAndBrochures');
-
+   
     const rows = 3;
     const columns = 3;
 

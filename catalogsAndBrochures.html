@@ -1,3 +1,6 @@
+
+
+User
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -182,88 +185,65 @@
         }
 
         // Otevření nového okna s obrázkem a detaily
-function openDetailsWindow(title, year, content, imageUrl) {
-    const detailsWindow = window.open('', '_blank');
-    detailsWindow.document.write(`
-        <html>
-        <head>
-            <title>${title}</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 20px;
-                }
-                img {
-                    max-width: 100%;
-                    height: auto;
-                }
-                .details {
-                    margin-top: 20px;
-                }
-            </style>
-        </head>
-        <body>
-            <h2>${title}</h2>
-            <div class="details">
+        function openDetailsWindow(title, author, year, price, imageUrl) {
+            const detailsWindow = document.getElementById('details-window');
+            detailsWindow.innerHTML = `
+                <h2>${title}</h2>
+                <p><strong>Autor:</strong> ${author}</p>
                 <p><strong>Rok vydania:</strong> ${year}</p>
-                <p>${content}</p>
-            </div>
-            <img src="${imageUrl}" alt="${title}">
-        </body>
-        </html>
-    `);
-}
+                <p><strong>Cena:</strong> ${price}</p>
+                <img src="${imageUrl}" alt="${title} Image">
+            `;
+            detailsWindow.style.display = 'block';
+        }
 
-document.addEventListener("DOMContentLoaded", function () {
-    createCatalogsAndBrochures();
-});
+        function createCatalogsAndBrochures() {
+            const container = document.getElementById('catalogsAndBrochures');
 
-function createCatalogsAndBrochures() {
-    const container = document.getElementById('catalogsAndBrochures');
+            const catalogsAndBrochuresData = [
+                { title: 'Katalóg 1', year: '2022', content: 'Obsah katalógu 1' },
+                { title: 'Katalóg 2', year: '2021', content: 'Obsah katalógu 2' },
+                { title: 'Brožúra 1', year: '2020', content: 'Obsah brožúry 1' },
+                // Ďalšie údaje o katalógoch a brožúrach
+            ];
 
-    const catalogsAndBrochuresData = [
-        { title: 'Katalóg 1', year: '2022', content: 'Obsah katalógu 1', imageUrl: 'path/k/obrazku1.jpg' },
-        { title: 'Katalóg 2', year: '2021', content: 'Obsah katalógu 2', imageUrl: 'path/k/obrazku2.jpg' },
-        { title: 'Brožúra 1', year: '2020', content: 'Obsah brožúry 1', imageUrl: 'path/k/obrazku3.jpg' },
-        // Ďalšie údaje o katalógoch a brožúrach
-    ];
+            for (let i = 0; i < catalogsAndBrochuresData.length; i++) {
+                const catalogItem = document.createElement('div');
+                catalogItem.classList.add('catalog-item');
+                catalogItem.setAttribute('data-title', catalogsAndBrochuresData[i].title);
+                catalogItem.setAttribute('data-year', catalogsAndBrochuresData[i].year);
+                catalogItem.setAttribute('data-content', catalogsAndBrochuresData[i].content);
 
-    catalogsAndBrochuresData.forEach(data => {
-        const catalogItem = document.createElement('div');
-        catalogItem.classList.add('catalog-item');
-        catalogItem.setAttribute('data-title', data.title);
-        catalogItem.setAttribute('data-year', data.year);
-        catalogItem.setAttribute('data-content', data.content);
-        catalogItem.setAttribute('data-image-url', data.imageUrl);
+                container.appendChild(catalogItem);
+            }
 
-        // Přidáme event listener na obrázek v katalogu
-        const catalogImage = document.createElement('img');
-        catalogImage.src = data.imageUrl;
-        catalogImage.alt = data.title;
-        catalogImage.addEventListener('click', function () {
-            showCatalogOrBrochureDetails(catalogItem);
-        });
+            const catalogItems = document.querySelectorAll('.catalog-item');
+            catalogItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    showCatalogOrBrochureDetails(item);
+                });
+            });
+        }
 
-        catalogItem.appendChild(catalogImage);
-        container.appendChild(catalogItem);
-    });
-}
+        function showCatalogOrBrochureDetails(catalogItem) {
+            const detailsContainer = document.getElementById('book-details');
+            const catalogTitle = catalogItem.getAttribute('data-title');
+            const catalogYear = catalogItem.getAttribute('data-year');
+            const catalogContent = catalogItem.getAttribute('data-content');
 
-function showCatalogOrBrochureDetails(catalogItem) {
-    const detailsContainer = document.getElementById('catalogAndBrochureDetails');
-    const catalogTitle = catalogItem.getAttribute('data-title');
-    const catalogYear = catalogItem.getAttribute('data-year');
-    const catalogContent = catalogItem.getAttribute('data-content');
-    const catalogImageUrl = catalogItem.getAttribute('data-image-url');
+            detailsContainer.innerHTML = `
+                <h2>${catalogTitle}</h2>
+                <p><strong>Rok vydania:</strong> ${catalogYear}</p>
+                <p>${catalogContent}</p>
+            `;
 
-    // Zavoláme funkci pro otevření nového okna s detaily
-    openDetailsWindow(catalogTitle, catalogYear, catalogContent, catalogImageUrl);
+            detailsContainer.style.display = 'block';
+        }
+    </script>
 
-    detailsContainer.innerHTML = `
-        <h2>${catalogTitle}</h2>
-        <p><strong>Rok vydania:</strong> ${catalogYear}</p>
-        <p>${catalogContent}</p>
-    `;
+</body>
+</html>
 
-    detailsContainer.style.display = 'block';
-}
+
+
+

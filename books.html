@@ -3,26 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knihy v kníhkupectve</title>
+
     <link rel="stylesheet" href="categories.css"> <!-- Odkaz na CSS súbor -->
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-    </style>
+
+    
+    <!-- Pripojenie CSS súboru -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Pripojenie JS súboru -->
+    <script src="main.js" defer></script>
+    <title>Knihy v kníhkupectve</title>
 </head>
 <body>
 
     <h1>Naše knihy</h1>
 
     <div id="book-categories">
-        
-        <h2>Kategórie kníh</h2>
+        <!--<h2>Kategórie kníh</h2>-->
         <ul>
             <li><a href="#">Fantasy</a></li>
             <li><a href="#">Detective</a></li>
@@ -33,13 +30,32 @@
             <li><a href="#">Science fiction</a></li>
             <li><a href="#">Legend</a></li>
             <li><a href="#">Humor</a></li>
-            <li><a href="#">Forklore</a></li>
+            
         
             <!-- Ďalšie kategórie kníh -->
         </ul>
     </div>
 
     <!-- Obsah stránky s knihami -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 id="modal-title">Knižní kategorie</h2>
+          <ul id="modal-content-list"></ul>
+        </div>
+      </div>
+      <button id="myButton">Klikni na mě</button>
+
+<script>
+  // Získání odkazu na tlačítko pomocí ID
+  const myButton = document.getElementById('myButton');
+
+  // Přidání event listeneru pro kliknutí
+  myButton.addEventListener('click', function() {
+    alert('Tlačítko bylo kliknuto!');
+  });
+</script>
+
 
 </body>
 </html>
