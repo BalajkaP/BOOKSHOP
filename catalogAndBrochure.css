@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px;
+    margin: 20px;                                                               /*Naše knihy ChatGPT*/
 }
 
 .brochure-item {
@@ -49,25 +49,3 @@
     display: none; /* Počiatočne skryté detaily */
 }
 
-/*
-#details-window {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 2px solid #ccc;
-    z-index: 1;
-}
-
-#details-window img {
-    max-width: 100%;
-    height: auto;
-}
-
-.details {
-    margin-top: 20px;
-}
-*/

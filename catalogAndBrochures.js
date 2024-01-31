@@ -24,28 +24,40 @@ function createCatalogsAndBrochures() {
             catalogItem.setAttribute('data-content', catalogsAndBrochuresData[i * columns + j].content);
 
             container.appendChild(catalogItem);
+
+            catalogItem.addEventListener('click', function() {
+                showCatalogOrBrochureDetails(catalogItem);
+            });
         }
     }
-
-    const catalogItems = document.querySelectorAll('.catalog-item');
-    catalogItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            showCatalogOrBrochureDetails(item);
-        });
-    });
 }
 
 function showCatalogOrBrochureDetails(catalogItem) {
-    const detailsContainer = document.getElementById('catalogAndBrochureDetails');
     const catalogTitle = catalogItem.getAttribute('data-title');
     const catalogYear = catalogItem.getAttribute('data-year');
     const catalogContent = catalogItem.getAttribute('data-content');
+
+    // Zobrazení detailů v modálním okně
+    const detailsContainer = document.getElementById('catalogAndBrochureDetails');
     
+    detailsContainer.innerHTML = `
+        <h2>${catalogTitle}</h2>
+        <p><strong>Rok vydania:</strong> ${catalogYear}</p>
+        <p>${catalogContent}</p>
+    `;
+
+    detailsContainer.style.display = 'block';
+
+    // Otevření okna s detaily
+    openDetailsWindow(catalogTitle, catalogYear, catalogContent);
+}
+
+function openDetailsWindow(title, year, content) {
     const detailsWindow = window.open('', '_blank');
     detailsWindow.document.write(`
         <html>
         <head>
-            <title>${catalogTitle}</title>
+            <title>${title}</title>
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -61,21 +73,13 @@ function showCatalogOrBrochureDetails(catalogItem) {
             </style>
         </head>
         <body>
-            <h2>${catalogTitle}</h2>
+            <h2>${title}</h2>
             <div class="details">
-                <p><strong>Rok vydania:</strong> ${catalogYear}</p>
-                <p>${catalogContent}</p>
+                <p><strong>Rok vydania:</strong> ${year}</p>
+                <p>${content}</p>
             </div>
-            <img src="cesta/k/obrazku1.jpg" alt="${catalogTitle}">
+            <img src="cesta/k/obrazku1.jpg" alt="${title}">
         </body>
         </html>
     `);
-
-    detailsContainer.innerHTML = `
-        <h2>${catalogTitle}</h2>
-        <p><strong>Rok vydania:</strong> ${catalogYear}</p>
-        <p>${catalogContent}</p>
-    `;
-
-    detailsContainer.style.display = 'block';
 }

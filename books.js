@@ -19,19 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
     setRandomBannerImage();
 });
 
-/*function setRandomBannerImage() {
-    const banner = document.getElementById('book-banner');
-
-    // Skontrolujte, či element s id 'book-banner' existuje
-    if (banner) {
-        const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-        const randomImage = images[Math.floor(Math.random() * images.length)];
-        const imagePath = 'cesta/k/' + randomImage; // Uveďte správnu cestu k obrázku
-        banner.style.backgroundImage = 'url("' + imagePath + '")';
-    } else {
-        console.error("Element with id 'book-banner' not found.");
-    }
-}*/
 
 async function fetchData(endpoint) {
     try {
