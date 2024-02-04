@@ -1,10 +1,10 @@
 package com.example.bookshop.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
+
 
 @Entity
 @Table(name = "books")
@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 public class BooksEntity {
     @Id
@@ -28,4 +29,7 @@ public class BooksEntity {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private AuthorsEntity author;
+
+    @ManyToMany
+    List<CartEntity> carts;
 }

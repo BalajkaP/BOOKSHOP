@@ -79,8 +79,23 @@
 </nav>
 
 <section>
-    <h2>Nákupný košík je prázdny !</h2>
-
+    <h2>Nákupný košík</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cart : ${cart}">
+            <td th:text="${cart.cartBook.title}"></td>
+            <td th:text="${cart.cartBook.price}"></td>
+            <td><button onclick="removeFromCart(this)">Remove from cart</button></td>
+        </tr>
+        </tbody>
+    </table>
 </section>
 
 <footer>
