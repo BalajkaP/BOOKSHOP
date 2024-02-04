@@ -10,28 +10,22 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "books")
-
+@Table(name = "cart")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BooksEntity {
+public class CartEntity {
+
     @Id
-    @Column(name = "id_book")
+    @Column(name = "id_cart")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "price")
-    private String price;
-
     @ManyToOne
-    @JoinColumn(name = "author_id")
-    private AuthorsEntity author;
+    @JoinColumn(name = "book_id")
+    private BooksEntity cartBook;
 
     @ManyToMany
-    List<CartEntity> carts;
+    List<BooksEntity> books;
 }
