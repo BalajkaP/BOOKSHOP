@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Welcome to Our Bookshop</title>
     <style>
         body {
@@ -63,16 +65,26 @@
             width: 100%;
         }
     </style>
+
+<!--    <script>-->
+<!--        // JavaScript kód na automatické presmerovanie na prihlasovaciu stránku-->
+<!--        window.onload = function() {-->
+<!--            window.location.href = '/login';-->
+<!--        };-->
+<!--    </script>-->
 </head>
 <body>
 <header>
     <h1>Welcome to Our Final Project - Bookshop!</h1>
 </header>
 
+<h1>Main Page Content</h1>
+
 <nav>
     <a th:href="@{/}" href="#">Home</a>
     <a th:href="@{/books}" href="#">Books</a>
     <a th:href="@{/cart}" href="#">Cart</a>
+
     <a th:href="@{/login}" href="#">Login</a>
     <a th:href="@{/contact}" href="#">Contact</a>
 </nav>
@@ -91,5 +103,34 @@
 <footer>
     <p>&copy; 2024 Bookshop Inc.</p>
 </footer>
+
+<!-- JavaScript kód na presmerovanie na prihlasovaciu stránku -->
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var loginLink = document.getElementById('loginLink');
+    //
+    //     if (loginLink) {
+    //         loginLink.addEventListener('click', function(event) {
+    //             event.preventDefault(); // Zabráni predvolenému správaniu odkazu
+    //
+    //             // Presmerovanie na prihlasovaciu stránku iba v prípade, že používateľ nie je prihlásený
+    //             if (shouldRedirectToLogin()) {
+    //                 window.location.href = '/login';
+    //             }
+    //         });
+    //     }
+    // });
+
+    function shouldRedirectToLogin() {
+        // Pridajte podmienku, ktorá určuje, či používateľ nie je prihlásený
+        // Tu predpokladáme, že máte nejaký spôsob, ako zistiť prihlásenie používateľa
+        // Ak máte nejakú premennú alebo stav, ktorý hovorí o prihlásení, použite ju
+        // Príklad: Ak je prihlásenie sledované pomocou globálnej premennej "isLoggedIn"
+        // return !isLoggedIn;
+
+        // Toto je len ilustratívny príklad, na skutočné použitie to prispôsobte podľa vašich potrieb
+        return true; // Vrátiť true, ak nie je jasné, či je používateľ prihlásený alebo nie
+    }
+</script>
 </body>
 </html>
