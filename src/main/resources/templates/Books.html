@@ -119,6 +119,7 @@
             <th>Author</th>
             <th>Price</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -127,11 +128,20 @@
             <td th:text="${book.author.name+' ' +book.author.surname}"></td>
             <td th:text="${book.price}"></td>
             <td><button onclick="addToCart(this)">Add to cart</button></td>
+            <td><button onclick="deleteBook(${book.id})">Vymaž knihu</button></td>
         </tr>
          </tbody>
     </table>
+    <form th:action="@{/createBook}" method="post">
+        <label>Title: <input type="text" name="title" /></label><br>
+        <label>First Name: <input type="text" name="firstName" /></label><br>
+        <label>Last Name: <input type="text" name="lastName" /></label><br>
+        <label>Price: <input type="text" name="price" /></label><br>
+        <button type="submit">Add Book</button>
+    </form>
 
 </section>
+
 
 <footer>
     <p>&copy; 2024 Bookshop Inc.</p>
