@@ -1,9 +1,7 @@
 package com.example.bookshop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.bookshop.entities.CartEntity;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 
@@ -18,6 +16,9 @@ public class User {
     private String password;
     // Add a field for role (String for simplicity)
     // Getters and setters for role
+
+    @OneToOne
+    private CartEntity cartEntity;
     @Getter
     private String role; // For simplicity, we're using a String, not a collection
 
