@@ -5,7 +5,6 @@ import com.example.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-//@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
@@ -54,7 +52,6 @@ public class UserController {
         } catch (AccessDeniedException e ) {
             return "redirect:/";
         }
-
     }
 
     @PostMapping("/admin/changeRole")
