@@ -1,4 +1,4 @@
-package com.example.bookshop;
+package com.example.bookshop.service;
 
 import com.example.bookshop.model.User;
 import com.example.bookshop.repository.UserRepository;

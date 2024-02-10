@@ -6,7 +6,6 @@ import com.example.bookshop.repository.AuthorRepository;
 import com.example.bookshop.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,6 @@ public class BookService {
             author.setBooks(new ArrayList<>()); // Inicializujem zoznam, ak je null
         }
         var list = author.getBooks();
-        list.add(booksEntity);
         author.setBooks(list);
         authorRepository.save(author);
         return bookRepository.save(booksEntity);

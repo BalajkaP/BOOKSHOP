@@ -26,6 +26,7 @@ public class CartService {
 
     public void addBookToCart(Long cartId, Long bookId) {
          CartEntity cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));
+//         CartEntity cart = cartRepository.findAll().stream().findFirst().orElseThrow();
          BooksEntity book = bookRepository.findById(bookId)
                  .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
          List<BooksEntity> listBooks = cart.getBooks();
