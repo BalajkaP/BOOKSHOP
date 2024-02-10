@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class MVCcontroller {
 
     @PostMapping("/addToCart/{bookId}")
     public String addToCart(@PathVariable Long bookId) {
-        Long cartId = 1L;
+        Long cartId = 10L;
         cartService.addBookToCart(cartId, bookId);
         return "redirect:/books";
     }
@@ -93,6 +92,13 @@ public class MVCcontroller {
     public String updateBookPrice(@RequestParam Long bookId, @RequestParam String newPrice) {
         bookService.updateBookPrice(bookId, newPrice);
         return "redirect:/books";
+    }
+
+    @GetMapping("/")
+    public String getRandomBooks(Model model) {
+        List<BooksEntity> randomBooks = bookService.getRandomBooks();
+        model.addAttribute("randomBooks", randomBooks);
+        return "Index"; // název Thymeleaf šablony pro zobrazení
     }
 
 }

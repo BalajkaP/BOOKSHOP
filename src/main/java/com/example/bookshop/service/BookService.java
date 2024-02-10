@@ -34,8 +34,8 @@ public class BookService {
                 .price(price)
                 .title(title)
                 .build();
-        if (author.getBooks() == null) {// Over, či má zoznam kníh autora hodnotu null
-            author.setBooks(new ArrayList<>()); // Inicializuj zoznam, ak je null
+        if (author.getBooks() == null) { // Overím či má zoznam kníh autora hodnotu null
+            author.setBooks(new ArrayList<>()); // Inicializujem zoznam, ak je null
         }
         var list = author.getBooks();
         list.add(booksEntity);
@@ -65,6 +65,10 @@ public class BookService {
 
         book.setPrice(newPrice);
         bookRepository.save(book);
+    }
+
+    public List<BooksEntity> getRandomBooks() {
+        return bookRepository.findRandomBooks();
     }
 }
 
