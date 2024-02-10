@@ -1,0 +1,22 @@
+<!-- updatePriceForm.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Book Price Form</title>
+</head>
+<body>
+<h2>Update Book Price Form</h2>
+<form action="/books/updatePrice" method="post">
+    <label for="bookId">Select Book:</label>
+    <select id="bookId" name="bookId">
+        <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+    </select>
+
+    <label for="newPrice">New Price:</label>
+    <input type="text" id="newPrice" name="newPrice" />
+
+    <button type="submit">Update Price</button>
+</form>
+</body>
+</html>

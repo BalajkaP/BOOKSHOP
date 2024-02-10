@@ -1,11 +1,9 @@
 package com.example.bookshop.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,10 +20,9 @@ public class CartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private BooksEntity cartBook;
 
     @ManyToMany
-    List<BooksEntity> books;
+    private List<BooksEntity> books = new ArrayList<>();
+
+
 }

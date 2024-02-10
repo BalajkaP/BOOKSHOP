@@ -90,9 +90,9 @@
         </thead>
         <tbody>
         <tr th:each="cart : ${cart}">
-            <td th:text="${cart.cartBook.title}"></td>
-            <td th:text="${cart.cartBook.price}"></td>
-            <td><button onclick="removeFromCart(this)">Remove from cart</button></td>
+
+                <a th:href="@{/remove/{id}(id=${cart.id})}">Remove from cart</a>
+            </td>
         </tr>
         </tbody>
     </table>
