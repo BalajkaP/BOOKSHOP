@@ -1,4 +1,4 @@
-package com.example.bookshop.service;
+package com.example.bookshop;
 
 import com.example.bookshop.entities.CartEntity;
 import com.example.bookshop.model.User;

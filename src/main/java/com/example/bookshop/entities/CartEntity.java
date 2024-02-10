@@ -23,7 +23,6 @@ public class CartEntity {
     @OneToOne
     private User user;
 
-
     @ManyToMany
     private List<BooksEntity> books;
 

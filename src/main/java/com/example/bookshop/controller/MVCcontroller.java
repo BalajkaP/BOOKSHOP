@@ -20,7 +20,6 @@ import java.util.List;
 public class MVCcontroller {
     private final CartService cartService;
     private final BookService bookService;
-    private final BookRepository bookRepository;
 
     @GetMapping
     public String welcomePage() {
@@ -97,7 +96,7 @@ public class MVCcontroller {
     public String getRandomBooks(Model model) {
         List<BooksEntity> randomBooks = bookService.getRandomBooks();
         model.addAttribute("randomBooks", randomBooks);
-        return "Index"; // název Thymeleaf šablony pro zobrazení
+        return "Index";
     }
 
 }

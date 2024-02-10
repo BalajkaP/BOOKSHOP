@@ -17,6 +17,7 @@ public class User {
     // Add a field for role (String for simplicity)
     // Getters and setters for role
 
+
     @OneToOne
     private CartEntity cartEntity;
     @Getter
