@@ -17,12 +17,12 @@ public class CartEntity {
 
     @Id
     @Column(name = "id_cart")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
 
     @ManyToMany
-    private List<BooksEntity> books = new ArrayList<>();
+    private List<BooksEntity> books;
 
 
 }

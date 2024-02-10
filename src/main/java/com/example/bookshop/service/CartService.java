@@ -24,7 +24,7 @@ public class CartService {
     }
 
 
-    /* public void addBookToCart(Long cartId, Long bookId) {
+    public void addBookToCart(Long cartId, Long bookId) {
          CartEntity cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));
          BooksEntity book = bookRepository.findById(bookId)
                  .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
@@ -36,13 +36,17 @@ public class CartService {
          listCarts.add(cart);
          book.setCarts(listCarts);
          bookRepository.save(book);
-     }*/
-    public void addBookToCart(Long cartId, Long bookId) {
-        CartEntity cart = cartRepository.findById(cartId).orElseGet(() -> {
+     }
+  /*  public void addBookToCart(Long cartId, Long bookId) {
+        boolean cartIsPresent = cartRepository.findById(cartId).isPresent();
+        CartEntity cart = null;
+        if (!cartIsPresent) {
             CartEntity newCart = new CartEntity();
-            newCart.setId(Math.toIntExact(cartId));
-            return cartRepository.save(newCart);
-        });
+            newCart.setId(cartId);
+            cartRepository.save(newCart);
+        } else {
+            cart = cartRepository.getReferenceById(cartId);
+        }
         BooksEntity book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
 
@@ -55,7 +59,7 @@ public class CartService {
         listCarts.add(cart);
         book.setCarts(listCarts);
         bookRepository.save(book);
-    }
+    }*/
 
 
     public void removeBookFromCart(Long cartId) {
