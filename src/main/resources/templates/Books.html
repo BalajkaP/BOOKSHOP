@@ -123,14 +123,29 @@
         </tr>
         </thead>
         <tbody>
+
         <tr th:each="book : ${books}">
             <td th:text="${book.title}"></td>
             <td th:text="${book.author.name+' ' +book.author.surname}"></td>
             <td th:text="${book.price}"></td>
-            <td><button onclick="addToCart(this)">Add to cart</button></td>
-            <td><button onclick="deleteBook(${book.id})">Vymaž knihu</button></td>
+            <td>
+                <form th:action="@{/addToCart/{bookId}(bookId=${book.id})}" method="post">
+                    <input type="hidden" name="cartId" value="1" />
+                    <button type="submit">Add to cart</button>
+                </form>
+            </td>
+            <td><a th:href="@{/deleteBook/{id}(id=${book.id})}">Vymaž knihu</a></td>
         </tr>
          </tbody>
+        <form th:action="@{/books/processAction}" method="post">
+            <label for="bookId">Select Book:</label>
+            <select id="bookId" name="bookId">
+                <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+            </select>
+            <label for="newPrice">New Price:</label>
+            <input type="text" id="newPrice" name="newPrice" />
+            <button type="submit" name="action" value="updatePrice">Update Price</button>
+        </form>
     </table>
     <form th:action="@{/createBook}" method="post">
         <label>Title: <input type="text" name="title" /></label><br>

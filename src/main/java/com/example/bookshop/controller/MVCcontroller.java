@@ -6,18 +6,18 @@ import com.example.bookshop.repository.BookRepository;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CartService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MVCcontroller {
     private final CartService cartService;
     private final BookService bookService;
@@ -53,10 +53,12 @@ public class MVCcontroller {
         return "Books";
     }
 
-    @GetMapping("/abcd")
-    public String getBooks() {
-        cartService.addBookToCart(1L, 1L);
-        return "Books";
+
+    @PostMapping("/addToCart/{bookId}")
+    public String addToCart(@PathVariable Long bookId) {
+        Long cartId = 1L;
+        cartService.addBookToCart(cartId, bookId);
+        return "redirect:/books";
     }
 
     @PostMapping("/createBook")
@@ -68,5 +70,32 @@ public class MVCcontroller {
         return "redirect:/books";
     }
 
+    @GetMapping("/deleteBook/{id}")
+    public String deleteBook(@PathVariable Long id) {
+        bookService.deleteBookById(id);
+        return "redirect:/books";
+    }
+
+    @GetMapping("/remove/{cartId}")
+    public String removeBookFromCart(@PathVariable Long cartId) {
+        cartService.removeBookFromCart(cartId);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/updatePrice")
+    public String showUpdatePriceForm(Model model) {
+        List<BooksEntity> allBooks = bookService.getAllBooks();
+        model.addAttribute("books", allBooks);
+        return "updatePriceForm";
+    }
+
+    @PostMapping("/updatePrice")
+    public String updateBookPrice(@RequestParam Long bookId, @RequestParam String newPrice) {
+        bookService.updateBookPrice(bookId, newPrice);
+        return "redirect:/books";
+    }
 
 }
+
+
+
