@@ -63,8 +63,39 @@
             bottom: 0;
             width: 100%;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #c5ff84;
+        }
     </style>
 </head>
+<script>
+    function addToCart(button) {
+        var bookTitle = button.parentElement.parentElement.children[0].innerText;
+        alert('Kniha "' + bookTitle + '" bola pridaná do košíka.');
+    }
+
+</script>
 <body>
 <header>
     <h1>Welcome to Our Final Project - Bookshop!</h1>
@@ -80,8 +111,57 @@
 
 <section>
     <h2>Zoznam kníh</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th></th>
+            <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.name+' ' +book.author.surname}"></td>
+            <td th:text="${book.price}"></td>
+            <td>
+                <form th:action="@{/addToCart/{bookId}(bookId=${book.id})}" method="post">
+                    <input type="hidden" name="cartId" value="1" />
+                    <button type="submit">Add to cart</button>
+                </form>
+            </td>
+            <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a th:href="@{/deleteBook/{id}(id=${book.id})}">Vymaž knihu</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <form th:action="@{/books/processAction}" method="post">
+        <label for="bookId">Select Book:</label>
+        <select id="bookId" name="bookId">
+            <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+        </select>
 
+        <label for="newPrice">New Price:</label>
+        <input type="text" id="newPrice" name="newPrice" />
+        <button type="submit" name="action" value="updatePrice">Update Price</button>
+    </form>
+    </div>
+    </table>
+    <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+    <form th:action="@{/createBook}" method="post">
+        <label>Title: <input type="text" name="title" /></label><br>
+        <label>First Name: <input type="text" name="firstName" /></label><br>
+        <label>Last Name: <input type="text" name="lastName" /></label><br>
+        <label>Price: <input type="text" name="price" /></label><br>
+        <button type="submit">Add Book</button>
+    </form>
+    </td>
 </section>
+
 
 <footer>
     <p>&copy; 2024 Bookshop Inc.</p>

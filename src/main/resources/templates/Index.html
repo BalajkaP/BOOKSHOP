@@ -62,6 +62,10 @@
             bottom: 0;
             width: 100%;
         }
+        img {
+            max-width: 100px; /* nebo jiný požadovaný maximální rozměr */
+            max-height: 100px;
+        }
     </style>
 </head>
 <body>
@@ -78,14 +82,13 @@
 </nav>
 
 <section>
-    <h2>Featured Books</h2>
-    <div th:each="book : ${featuredBooks}">
-        <div>
-            <h3 th:text="${book.title}">Book Title</h3>
-            <p th:text="${book.description}">Description</p>
-            <!-- More details about the book -->
-        </div>
-    </div>
+    <h1>Featured Books</h1>
+    <ul>
+        <li th:each="book : ${randomBooks}">
+            <p th:text="${#strings.toUpperCase(book.title)}"></p>
+            <img th:src="@{/images/kniha.jfif}" alt="Book Image" />
+        </li>
+    </ul>
 </section>
 
 <footer>
