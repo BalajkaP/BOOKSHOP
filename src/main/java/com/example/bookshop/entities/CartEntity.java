@@ -1,5 +1,6 @@
 package com.example.bookshop.entities;
 
+import com.example.bookshop.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,9 @@ public class CartEntity {
     @Column(name = "id_cart")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @OneToOne
+    private User user;
 
 
     @ManyToMany

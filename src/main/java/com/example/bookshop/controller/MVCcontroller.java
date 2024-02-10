@@ -55,8 +55,7 @@ public class MVCcontroller {
 
     @PostMapping("/addToCart/{bookId}")
     public String addToCart(@PathVariable Long bookId) {
-        Long cartId = 10L;
-        cartService.addBookToCart(cartId, bookId);
+        cartService.addBookToCart(1L, bookId);
         return "redirect:/books";
     }
 
