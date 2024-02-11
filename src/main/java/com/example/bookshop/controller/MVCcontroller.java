@@ -26,13 +26,9 @@ public class MVCcontroller {
 
     private final UserRepository userRepository;
 
-    @RequestMapping("/cart")
-    public String showCart() {
-        return "Cart";
-    }
-
     @RequestMapping("/contact")
-    public String showContacts(Model model) { Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String showContacts(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 //pridať do service aby som v mvc controler nepristupoval k repozitaru
         String username = authentication.getName();
@@ -42,7 +38,7 @@ public class MVCcontroller {
 
         Long loggedUserCart = user.getCartEntity().getId();
 
-        model.addAttribute("cartId",loggedUserCart);
+        model.addAttribute("cartId", loggedUserCart);
         return "Contact";
     }
 
@@ -131,6 +127,17 @@ public class MVCcontroller {
     @GetMapping("/cart/{cartId}")
     public String getAllBooksInCart(@PathVariable Long cartId, Model model) {
         List<BooksEntity> books = bookService.getAllBooksInCart(cartId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId", loggedUserCart);
         model.addAttribute("books", books);
         return "Cart";
     }
