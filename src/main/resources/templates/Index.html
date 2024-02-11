@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Our Bookshop</title>
@@ -51,6 +52,26 @@
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 50%; /* Zmenšiť celý rámeček na 50% šírky */
+            margin: 0 auto; /* Centrovať rámec */
+        }
+
+        section div img {
+            max-width: 100%; /* Obrázok zaberá 100% šírky rámca */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto; /* Centrovať obrázky v rámci divu */
+        }
+
+        section div ul {
+            list-style: none; /* Odstrániť body v zozname */
+            padding: 0; /* Vynulovať odstup v zozname */
+        }
+
+        section div li {
+            margin-bottom: 10px; /* Pridať odstup medzi knihami */
         }
 
         footer {
@@ -68,6 +89,7 @@
         }
     </style>
 </head>
+
 <body>
 <header>
     <h1>Welcome to Our Final Project - Bookshop!</h1>
@@ -76,23 +98,28 @@
 <nav>
     <a th:href="@{/}" href="#">Home</a>
     <a th:href="@{/books}" href="#">Books</a>
-    <a th:href="@{/cart}" href="#">Cart</a>
+    <a th:href="@{/cart/{cartId}(cartId=${cartId})}" href="#">Cart</a>
     <a th:href="@{/login}" href="#">Login</a>
     <a th:href="@{/contact}" href="#">Contact</a>
 </nav>
 
 <section>
-    <h1>Featured Books</h1>
-    <ul>
-        <li th:each="book : ${randomBooks}">
-            <p th:text="${#strings.toUpperCase(book.title)}"></p>
-            <img th:src="@{/images/kniha.jfif}" alt="Book Image" />
-        </li>
-    </ul>
+    <h2>Featured Books</h2>
+    <div>
+        <ul>
+            <li th:each="book : ${randomBooks}">
+                <div>
+                    <p th:text="${#strings.toUpperCase(book.title)}"></p>
+                    <img th:src="@{/images/kniha.jfif}" alt="Book Image" />
+                </div>
+            </li>
+        </ul>
+    </div>
 </section>
 
 <footer>
     <p>&copy; 2024 Bookshop Inc.</p>
 </footer>
 </body>
+
 </html>

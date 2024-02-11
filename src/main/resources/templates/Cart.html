@@ -73,14 +73,13 @@
 <nav>
     <a th:href="@{/}" href="#">Home</a>
     <a th:href="@{/books}" href="#">Books</a>
-    <a th:href="@{/cart}" href="#">Cart</a>
+    <a th:href="@{/cart/{cartId}(cartId=${cartId})}" href="#">Cart</a>
     <a th:href="@{/login}" href="#">Login</a>
     <a th:href="@{/contact}" href="#">Contact</a>
 </nav>
 
 <section>
     <h2>All Carts</h2>
-    <div th:if="${cart != null}">
     <table border="1">
         <thead>
         <tr>
@@ -90,26 +89,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cart : ${carts.books}">
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author.name + ' ' + book.author.surname}"></td>
-            <td th:text="${book.price}"></td>
-        </tr>
-        <tr th:each="cart : ${carts}">
-            <!-- Loop through each book in the cart -->
-            <td th:each="book : ${cart.books}">
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author.name}"></td>
-            <td th:text="${book.price}"></td>
-            </td>
-        </tr>
+        <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author.name+' ' +book.author.surname}"></td>
+        <td th:text="${book.price}"></td>
+        <td>
         </tbody>
     </table>
-    </div>
 </section>
-<div th:if="${cart == null}">
-    <p>No items in the cart</p>
-</div>
 <footer>
     <p>&copy; 2024 Bookshop Inc.</p>
 </footer>

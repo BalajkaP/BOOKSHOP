@@ -2,8 +2,10 @@ package com.example.bookshop.service;
 
 import com.example.bookshop.entities.AuthorsEntity;
 import com.example.bookshop.entities.BooksEntity;
+import com.example.bookshop.entities.CartEntity;
 import com.example.bookshop.repository.AuthorRepository;
 import com.example.bookshop.repository.BookRepository;
+import com.example.bookshop.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,19 @@ import java.util.List;
 public class BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
+    private final CartRepository cartRepository;
 
     public List<BooksEntity> getAllBooks() {
         return bookRepository.findAll();
     }
+
+
+    public List<BooksEntity> getAllBooksInCart(Long cartId) {
+        CartEntity cart = cartRepository.getReferenceById(cartId);
+        return bookRepository.findAllByCartsIn(List.of(cart));
+
+    }
+
 
     public BooksEntity addBook(String title, String authorName, String authorSurname, String price) {
         AuthorsEntity author = authorRepository.findByNameAndSurname(authorName, authorSurname);

@@ -104,7 +104,7 @@
 <nav>
     <a th:href="@{/}" href="#">Home</a>
     <a th:href="@{/books}" href="#">Books</a>
-    <a th:href="@{/cart}" href="#">Cart</a>
+    <a th:href="@{/cart/{cartId}(cartId=${cartId})}" href="#">Cart</a>
     <a th:href="@{/login}" href="#">Login</a>
     <a th:href="@{/contact}" href="#">Contact</a>
 </nav>
@@ -153,7 +153,9 @@
     </table>
     <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
     <form th:action="@{/createBook}" method="post">
+
         <label>Title: <input type="text" name="title" required/></label><br>
+
         <label>First Name: <input type="text" name="firstName" required/></label><br>
         <label>Last Name: <input type="text" name="lastName" required/></label><br>
         <label>Price: <input type="text" name="price" required/></label><br>

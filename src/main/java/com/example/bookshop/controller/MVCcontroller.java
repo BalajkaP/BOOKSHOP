@@ -2,10 +2,14 @@ package com.example.bookshop.controller;
 
 import com.example.bookshop.entities.BooksEntity;
 import com.example.bookshop.entities.CartEntity;
+import com.example.bookshop.model.User;
+import com.example.bookshop.repository.UserRepository;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,31 +24,38 @@ public class MVCcontroller {
     private final CartService cartService;
     private final BookService bookService;
 
-    @GetMapping
-    public String welcomePage() {
-        return "Index";
-    }
-
-    @RequestMapping("/cart")
-    public String showCart(Model model) {
-        return "Cart";
-    }
-
+    private final UserRepository userRepository;
 
     @RequestMapping("/contact")
     public String showContacts(Model model) {
-        return "Contact";
-    }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-    @GetMapping("/cart")
-    public String getAllItem(Model model) {
-        List<CartEntity> carts = cartService.getAllItem();
-        model.addAttribute("carts",carts);
-        return "Cart";
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId", loggedUserCart);
+        return "Contact";
     }
 
     @GetMapping("/books")
     public String getAllBooks(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId",loggedUserCart);
+
         List<BooksEntity> books = bookService.getAllBooks();
         model.addAttribute("books", books);
         return "Books";
@@ -94,8 +105,41 @@ public class MVCcontroller {
     @GetMapping("/")
     public String getRandomBooks(Model model) {
         List<BooksEntity> randomBooks = bookService.getRandomBooks();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId",loggedUserCart);
+
+
+
+
+
         model.addAttribute("randomBooks", randomBooks);
         return "Index";
+    }
+    @GetMapping("/cart/{cartId}")
+    public String getAllBooksInCart(@PathVariable Long cartId, Model model) {
+        List<BooksEntity> books = bookService.getAllBooksInCart(cartId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId", loggedUserCart);
+        model.addAttribute("books", books);
+        return "Cart";
     }
 
 }
