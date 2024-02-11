@@ -20,10 +20,6 @@ public class CartService {
     private final CartRepository cartRepository;
     private final BookRepository bookRepository;
 
-    public List<CartEntity> getAllItem() {
-        return cartRepository.findAll();
-    }
-
 
     public void addBookToCart(Long cartId, Long bookId) {
         CartEntity cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));

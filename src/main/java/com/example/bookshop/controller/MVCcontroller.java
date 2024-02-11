@@ -36,12 +36,6 @@ public class MVCcontroller {
         return "Contact";
     }
 
-    @GetMapping("/cart")
-    public String getAllItem(Model model) {
-        List<CartEntity> carts = cartService.getAllItem();
-        model.addAttribute("carts",carts);
-        return "Cart";
-    }
 
     @GetMapping("/books")
     public String getAllBooks(Model model) {
@@ -96,6 +90,12 @@ public class MVCcontroller {
         List<BooksEntity> randomBooks = bookService.getRandomBooks();
         model.addAttribute("randomBooks", randomBooks);
         return "Index";
+    }
+    @GetMapping("/cart/{cartId}")
+    public String getAllBooksInCart(@PathVariable Long cartId, Model model) {
+        List<BooksEntity> books = bookService.getAllBooksInCart(cartId);
+        model.addAttribute("books", books);
+        return "cart";
     }
 
 }
