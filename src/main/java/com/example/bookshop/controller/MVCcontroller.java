@@ -2,7 +2,6 @@ package com.example.bookshop.controller;
 
 import com.example.bookshop.entities.BooksEntity;
 import com.example.bookshop.entities.CartEntity;
-import com.example.bookshop.repository.BookRepository;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -38,9 +37,9 @@ public class MVCcontroller {
     }
 
     @GetMapping("/cart")
-    public String getAllCart(Model model) {
-        List<CartEntity> cart = cartService.getAllCart();
-        model.addAttribute("cart", cart);
+    public String getAllItem(Model model) {
+        List<CartEntity> carts = cartService.getAllItem();
+        model.addAttribute("carts",carts);
         return "Cart";
     }
 

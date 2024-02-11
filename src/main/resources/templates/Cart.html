@@ -79,25 +79,37 @@
 </nav>
 
 <section>
-    <h2>Nákupný košík</h2>
+    <h2>All Carts</h2>
+    <div th:if="${cart != null}">
     <table border="1">
         <thead>
         <tr>
             <th>Title</th>
+            <th>Author</th>
             <th>Price</th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cart : ${cart}">
-
-                <a th:href="@{/remove/{id}(id=${cart.id})}">Remove from cart</a>
+        <tr th:each="cart : ${carts.books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.name + ' ' + book.author.surname}"></td>
+            <td th:text="${book.price}"></td>
+        </tr>
+        <tr th:each="cart : ${carts}">
+            <!-- Loop through each book in the cart -->
+            <td th:each="book : ${cart.books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.name}"></td>
+            <td th:text="${book.price}"></td>
             </td>
         </tr>
         </tbody>
     </table>
+    </div>
 </section>
-
+<div th:if="${cart == null}">
+    <p>No items in the cart</p>
+</div>
 <footer>
     <p>&copy; 2024 Bookshop Inc.</p>
 </footer>
