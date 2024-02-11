@@ -54,7 +54,7 @@ public class MVCcontroller {
 
         Long loggedUserCart = user.getCartEntity().getId();
 
-        model.addAttribute("cartId",loggedUserCart);
+        model.addAttribute("cartId", loggedUserCart);
 
         List<BooksEntity> books = bookService.getAllBooks();
         model.addAttribute("books", books);
@@ -63,8 +63,19 @@ public class MVCcontroller {
 
 
     @PostMapping("/addToCart/{bookId}")
-    public String addToCart(@PathVariable Long bookId) {
-        cartService.addBookToCart(1L, bookId);
+    public String addToCart(@PathVariable Long bookId, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId", loggedUserCart);
+        cartService.addBookToCart(loggedUserCart, bookId);
         return "redirect:/books";
     }
 
@@ -115,15 +126,13 @@ public class MVCcontroller {
 
         Long loggedUserCart = user.getCartEntity().getId();
 
-        model.addAttribute("cartId",loggedUserCart);
-
-
-
+        model.addAttribute("cartId", loggedUserCart);
 
 
         model.addAttribute("randomBooks", randomBooks);
         return "Index";
     }
+
     @GetMapping("/cart/{cartId}")
     public String getAllBooksInCart(@PathVariable Long cartId, Model model) {
         List<BooksEntity> books = bookService.getAllBooksInCart(cartId);
