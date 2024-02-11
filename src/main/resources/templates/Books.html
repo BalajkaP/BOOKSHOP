@@ -153,10 +153,10 @@
     </table>
     <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
     <form th:action="@{/createBook}" method="post">
-        <label>Title: <input type="text" name="title" /></label><br>
-        <label>First Name: <input type="text" name="firstName" /></label><br>
-        <label>Last Name: <input type="text" name="lastName" /></label><br>
-        <label>Price: <input type="text" name="price" /></label><br>
+        <label>Title: <input type="text" name="title" required/></label><br>
+        <label>First Name: <input type="text" name="firstName" required/></label><br>
+        <label>Last Name: <input type="text" name="lastName" required/></label><br>
+        <label>Price: <input type="text" name="price" required/></label><br>
         <button type="submit">Add Book</button>
     </form>
     </td>
