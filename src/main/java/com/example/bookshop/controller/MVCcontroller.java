@@ -2,10 +2,14 @@ package com.example.bookshop.controller;
 
 import com.example.bookshop.entities.BooksEntity;
 import com.example.bookshop.entities.CartEntity;
+import com.example.bookshop.model.User;
+import com.example.bookshop.repository.UserRepository;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +24,8 @@ public class MVCcontroller {
     private final CartService cartService;
     private final BookService bookService;
 
+    private final UserRepository userRepository;
+
     @GetMapping
     public String welcomePage() {
         return "Index";
@@ -27,6 +33,7 @@ public class MVCcontroller {
 
     @RequestMapping("/cart")
     public String showCart(Model model) {
+
         return "Cart";
     }
 
@@ -36,9 +43,20 @@ public class MVCcontroller {
         return "Contact";
     }
 
-
     @GetMapping("/books")
     public String getAllBooks(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("carId",loggedUserCart);
+
         List<BooksEntity> books = bookService.getAllBooks();
         model.addAttribute("books", books);
         return "Books";
@@ -95,7 +113,7 @@ public class MVCcontroller {
     public String getAllBooksInCart(@PathVariable Long cartId, Model model) {
         List<BooksEntity> books = bookService.getAllBooksInCart(cartId);
         model.addAttribute("books", books);
-        return "cart";
+        return "Cart";
     }
 
 }
