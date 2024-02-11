@@ -27,27 +27,10 @@ public class MVCcontroller {
     private final UserRepository userRepository;
 
     @GetMapping
-    public String welcomePage() {
-        return "Index";
-    }
-
-    @RequestMapping("/cart")
-    public String showCart(Model model) {
-
-        return "Cart";
-    }
-
-
-    @RequestMapping("/contact")
-    public String showContacts(Model model) {
-        return "Contact";
-    }
-
-    @GetMapping("/books")
-    public String getAllBooks(Model model) {
+    public String welcomePage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
         String username = authentication.getName();
 
         User user = userRepository.findByUsername(username).orElseThrow();
@@ -55,7 +38,43 @@ public class MVCcontroller {
 
         Long loggedUserCart = user.getCartEntity().getId();
 
-        model.addAttribute("carId",loggedUserCart);
+        model.addAttribute("cartId",loggedUserCart);
+        return "Index";
+    }
+
+    @RequestMapping("/cart")
+    public String showCart() {
+        return "Cart";
+    }
+
+    @RequestMapping("/contact")
+    public String showContacts(Model model) { Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId",loggedUserCart);
+        return "Contact";
+    }
+
+    @GetMapping("/books")
+    public String getAllBooks(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        model.addAttribute("cartId",loggedUserCart);
 
         List<BooksEntity> books = bookService.getAllBooks();
         model.addAttribute("books", books);
