@@ -14,7 +14,7 @@
         }
 
         header {
-            background-image: url('/images/vrchný banner.jpg'); /* Cesta k tvojej fotke */
+            background-image: url('/images/banner.jpg'); /* Cesta k tvojej fotke */
             background-size: auto; /* Aby sa fotka prispôsobila veľkosti headru */
             background-position: top; /* Aby bola fotka zarovnaná do stredu headru */
             color: tan;
@@ -92,8 +92,8 @@
             width: 100%;
         }
         img {
-            max-width: 100px; /* nebo jiný požadovaný maximální rozměr */
-            max-height: 100px;
+            max-width: 200px; /* nebo jiný požadovaný maximální rozměr */
+            max-height:200px;
         }
     </style>
 </head>
@@ -125,7 +125,7 @@
                     <img th:if="${book.title eq 'Lord of the Rings'}" th:src="@{/images/LOTR.jfif}" alt="Book Image" />
                     <img th:if="${book.title eq 'Harry Potter'}" th:src="@{/images/HP1.jpg}" alt="Book Image" />
                     <img th:if="${book.title eq 'Harry Potter 2'}" th:src="@{/images/HP2.jpg}" alt="Book Image" />
-                    <img th:unless="${book.title eq 'The Witcher' or book.title eq 'The Witcher 2' or book.title eq 'The Witcher 3' or book.title eq 'The Dune' or book.title eq 'Lord of the rings' or book.title eq 'Harry Potter' or book.title eq 'Harry Potter 2'}" th:src="@{/images/kniha.jfif}" alt="Book Image" />
+                    <img th:unless="${book.title eq 'The Witcher' or book.title eq 'The Witcher 2' or book.title eq 'The Witcher 3' or book.title eq 'The Dune' or book.title eq 'Lord of the Rings' or book.title eq 'Harry Potter' or book.title eq 'Harry Potter 2'}" th:src="@{/images/kniha.jfif}" alt="Book Image" />
 
                 </div>
             </li>
