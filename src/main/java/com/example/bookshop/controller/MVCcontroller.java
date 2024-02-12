@@ -30,7 +30,7 @@ public class MVCcontroller {
     public String showContacts(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-//pridať do service aby som v mvc controler nepristupoval k repozitaru
+        //pridať do service aby som v mvc controler nepristupoval k repozitaru
         String username = authentication.getName();
 
         User user = userRepository.findByUsername(username).orElseThrow();

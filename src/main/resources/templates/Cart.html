@@ -14,14 +14,22 @@
         }
 
         header {
-            background-color: #fad30e;
-            color: white;
+            background-image: url('/images/vrchný banner.jpg'); /* Cesta k tvojej fotke */
+            background-size: auto; /* Aby sa fotka prispôsobila veľkosti headru */
+            background-position: top; /* Aby bola fotka zarovnaná do stredu headru */
+            color: tan;
             text-align: center;
-            padding: 1em 0;
+            padding: 1.5em 0;
         }
 
         h1 {
             margin: 0;
+            display: inline-block; /* Umožňuje gradientný pozadie na textu */
+            padding: 5px 10px; /* Odstup vnútri ohraničenia */
+            color: black; /* Biely text */
+            background-color: wheat; /* Čierne pozadie */
+            border-radius: 30px; /* Hodnota polomeru zaoblenia */
+            overflow: hidden; /* Uistí sa, že rohy budú zaoblené aj pre obsah vnútri */
         }
 
         nav {
@@ -58,7 +66,7 @@
             background-color: #333;
             color: white;
             text-align: center;
-            padding: 1em 0;
+            padding: 0.6em 0;
             position: fixed;
             bottom: 0;
             width: 100%;
