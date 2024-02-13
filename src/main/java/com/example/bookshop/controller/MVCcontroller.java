@@ -94,11 +94,6 @@ public class MVCcontroller {
         return "redirect:/books";
     }
 
-    @GetMapping("/remove/{cartId}")
-    public String removeBookFromCart(@PathVariable Long cartId) {
-        cartService.removeBookFromCart(cartId);
-        return "redirect:/cart";
-    }
 
     @GetMapping("/updatePrice")
     public String showUpdatePriceForm(Model model) {
@@ -150,7 +145,18 @@ public class MVCcontroller {
         model.addAttribute("books", books);
         return "Cart";
     }
+    @PostMapping("/removeBookFromCart/{bookId}")
+    public String removeBookFromCart(@PathVariable Long bookId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
 
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+        Long loggedUserCart = user.getCartEntity().getId();
+
+        cartService.removeBookFromCart(loggedUserCart, bookId);
+        return "redirect:/cart/" + loggedUserCart;
+    }
 }
 
 

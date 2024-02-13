@@ -35,8 +35,24 @@ public class CartService {
         bookRepository.save(book);
     }
 
-    public void removeBookFromCart(Long cartId) {
-        CartEntity cart = cartRepository.findById(cartId).orElseThrow();
-        cartRepository.delete(cart);
+    public void removeBookFromCart(Long cartId, Long bookId) {
+        // Získaj košík pomocou ID
+        CartEntity cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Košík nebol nájdený"));
+
+        // Získaj knihu pomocou ID
+        BooksEntity book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Kniha neexistuje"));
+
+        // Odstráň knihu z košíka
+        cart.getBooks().remove(book);
+
+        // Ulož zmeny v košíku
+        cartRepository.save(cart);
+
+        // Odstráň košík z knihy
+        book.getCarts().remove(cart);
+
+        // Ulož zmeny v knihe
+        bookRepository.save(book);
     }
+
 }
